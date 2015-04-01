@@ -1,0 +1,100 @@
+// includes
+@import url("var.inc.less");
+@import url("glyph.inc.less");
+
+@purple: #6B2A7E;
+@green:  #55B747;
+
+// tags
+body {
+	background: @purple;
+	color: @lightest;
+	font: 16px/1.2 'Patrick Hand', Helvetica, sans-serif;
+	font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: inherit;
+}
+
+
+// classes
+.big-btn {
+	@r: 50%;
+	appearance: none;
+	display: inline-block;
+	background: none;
+	color: #fff;
+	font: inherit;
+	font-size: 50px;
+	padding: 0;
+	border: 0;
+	border-radius: @r;
+	margin: 0 0 @u*2 0;
+	outline: none;
+	box-shadow: 0 8px 0 darken(@green, 20%), 0 15px 20px rgba(0, 0, 0, .35);
+	transition: box-shadow .1s ease-in-out;
+	user-select: none;
+	
+	> * {
+		display: inline-block;
+		background-color: @green;
+		background-image: linear-gradient(fadeout(@lightest, 90%), fadeout(@darkest, 90%));
+		text-transform: uppercase;
+		text-shadow: 0 -1px 1px rgba(175, 49, 95, .7);
+		padding: 30px 45px 50px;
+		border-radius: @r;
+		box-shadow: inset 0 -1px 1px rgba(255, 255, 255, .15);
+		transition: background-color .2s ease-in-out, transform .1s ease-in-out;
+	}
+	&:hover > * {
+	    background-color: lighten(@green, 5%);
+	    text-shadow: 0 -1px 1px rgba(175, 49, 95, .9), 0 0 5px rgba(255, 255, 255, .8);
+	}
+	&:active > * {
+	    transform: translate(0, 4px);
+	}
+	&:active,
+	&:focus {
+	    box-shadow: 0 8px 0 darken(@green, 20%), 0 12px 10px rgba(0, 0, 0, .3);
+	}
+}
+
+// sections
+#banner {
+	font-size: 10px;
+	text-transform: uppercase;
+	
+	img {
+		width: 60%;
+	}
+	h1 {
+		font-size: 9em;
+		margin: 0;
+	}
+	h2 {
+		font-size: 4em;
+		margin: 0;
+		
+		strong {
+			display: block;
+			font-size: 2.25em;
+			line-height: .8;
+			font-weight: normal;
+		}
+	}
+}
+#action {
+	img {
+		transform: rotate(45deg);
+	}
+}
+#footer {
+	color: @darkest;
+	font: 14px/1.4 Helvetica, sans-serif;
+	padding-bottom: @hh/2;
+}
