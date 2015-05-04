@@ -34,7 +34,7 @@ body {
 
 // sections
 #app {
-	overflow: hidden;
+	overflow-x: hidden;
 }
 @keyframes look-at-me {
 	0% {
@@ -194,12 +194,13 @@ body {
 	&.popped {
 		.hole {
 			.big-btn {
-				transform: rotateX(-170deg) translate(-300px, -1000px);
-				transition: all @t*3 ease-in-out 60ms;
+				pointer-events: none;
+				transform: rotateX(-190deg) translate(-300px, -400px) scaleY(0);
+				transition: all @t*2 ease-in-out 60ms;
 			}
-		}
-		.share {
-			opacity: 1;
+			.share {
+				opacity: 1;
+			}
 		}
 	}
 }
