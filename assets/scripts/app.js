@@ -1,75 +1,50 @@
-angular.module('XXXXXX', ['ui.router', 'ui.bootstrap', 'duScroll', 'firebaseHelper', 'contentful', 'hc.marked'])
+angular.module('sodalicious', ['firebaseHelper'])
 	
 	.run(function(){
 		FastClick.attach(document.body);
 	})
 	
-	.config(function($locationProvider, $urlRouterProvider, $stateProvider, $firebaseHelperProvider, contentfulProvider){
-		// routing
-		$locationProvider.html5Mode(true);
-		$urlRouterProvider.when('',  '/');
-		var pages = [
-			'home'
-		];
-		$stateProvider
-			// pages
-			.state('main', {
-				abstract: true,
-				templateUrl: 'views/main.html',
-			})
-				.state('page', {
-					parent: 'main',
-					url: '/{page:|' + pages.join('|') + '}',
-					templateUrl: function($stateParams){
-						return 'views/page/' + ($stateParams.page || 'home') + '.html';
-					},
-				})
-			// catch-all
-			.state('otherwise', {
-				url: '*path',
-				templateUrl: 'views/page/404.html',
-			});
-		
-		// data
-		$firebaseHelperProvider.namespace('demo');
-		contentfulProvider.setOptions({
-			accessToken: 'XXXXXX',
-			space:       'XXXXXX',
-		});
+	.config(function($firebaseHelperProvider){
+		$firebaseHelperProvider.namespace('sodalicious');
 	})
-	
-	.controller('AppCtrl', function($rootScope, $state, $document, $location){
-		$rootScope.$state = $state;
 		
-		// smooth scrolling
-		$rootScope.scrollTo = function(id){
-			var el = document.getElementById(id);
-			if(el) $document.scrollToElementAnimated(el, document.getElementById('header').offsetHeight || 0);
+	.controller('AppCtrl', function($scope, $firebaseHelper, $timeout){
+/*
+		$scope.randp = function(min, max){
+			return Math.random() * max + min + '%';
 		};
-		$rootScope.scrollTo($location.path().replace(/^\//, ''));
-	})
-	.controller('HomePageCtrl', function($scope, $firebaseHelper, contentful){
-		// angular
-		$scope.angularWorking = 'Yes';
+*/
 		
-		// firebase
-		$firebaseHelper.load('example').then(function(example){
-			$scope.firebaseWorking = true;
-		});
 		
-		// contentful
-		contentful.entries('order=sys.createdAt').then(function(response){
-			$scope.entries = response.data.items;
-		});
-	})
-	
-	// smooth scrolling
-	.directive('href', function(){
-		return function($scope, $element, $attrs){
-			if($attrs.href && $attrs.href[0] == '#'){
-				$element.on('click', function(e){
-					$scope.scrollTo(($attrs.href || '').replace(/^#/, ''));
+		var now = function(){ return new Date; };
+		var startTime = +now();
+		$scope.startTimer = function(){
+			startTime = +now();
+		};
+		
+		var clicks = $firebaseHelper.array('clicks');
+		var loaded = $firebaseHelper.object('count').$bindTo($scope, 'count');
+		$scope.pop = function(){
+			loaded.then(function(){
+				$scope.popped = true;
+				$scope.count.$value = ($scope.count.$value || 0) + 1;
+				clicks.$add({
+					timestamp: now().toString(),
+					waited: Math.round((+now() - startTime) / 1000),
+					useragent: navigator.userAgent,
 				});
-			}
+				
+				$timeout(function(){
+					$scope.poppedDone= true;
+				}, 600);
+			});
+		};
+		
+		$scope.friendlyCount = function(count){
+			if(count < 1000) return count;
+			else if(count < 1000000) return Math.floor(count / 100) / 10 + 'K';
+			else if (count < 1000000000) return Math.floor(count / 100000) / 10 + 'M';
+			
+			return count;
 		};
 	});

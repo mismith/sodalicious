@@ -19,48 +19,20 @@ body {
 
 
 // classes
-.big-btn {
-	@r: 50%;
-	appearance: none;
-	display: inline-block;
-	background: none;
-	color: #fff;
-	font: inherit;
-	font-size: 50px;
-	padding: 0;
-	border: 0;
-	border-radius: @r;
-	margin: 0 0 @u*2 0;
-	outline: none;
-	box-shadow: 0 12px 0 darken(@green, 20%), 0 15px 20px rgba(0, 0, 0, .35);
-	transition: box-shadow .1s ease-in-out;
-	user-select: none;
-	
-	> * {
-		display: inline-block;
-		background-color: @green;
-		background-image: linear-gradient(fadeout(@lightest, 90%), fadeout(@darkest, 90%));
-		text-transform: uppercase;
-		text-shadow: 0 -1px 1px rgba(175, 49, 95, .7);
-		padding: 35px 40px 55px;
-		border-radius: @r;
-		box-shadow: inset 0 -1px 1px rgba(255, 255, 255, .15);
-		transition: background-color .2s ease-in-out, transform .1s ease-in-out;
-	}
-	&:hover > * {
-	    background-color: lighten(@green, 5%);
-	    text-shadow: 0 -1px 1px rgba(175, 49, 95, .9), 0 0 5px rgba(255, 255, 255, .8);
-	}
-	&:active > * {
-	    transform: translate(0, 4px);
-	}
-	&:active,
-	&:focus {
-	    box-shadow: 0 12px 0 darken(@green, 20%), 0 12px 10px rgba(0, 0, 0, .32);
-	}
-}
+
 
 // sections
+#app {
+	//overflow: hidden;
+}
+@keyframes look-at-me {
+	0% {
+		transform: scale3d(1, 1, 1);
+	}
+	100% {
+		transform: scale3d(1.2, 1.2, 1.1);
+	}
+}
 #banner {
 	font-size: 10px;
 	text-transform: uppercase;
@@ -85,8 +57,102 @@ body {
 	}
 }
 #action {
-	img {
-		transform: rotate(45deg);
+	h2 {
+		animation: look-at-me 2s infinite alternate;
+	}
+	.hole {
+		display: inline-block;
+		position: relative;
+		background-color: @darkest;
+		vertical-align: middle;
+		border: solid @u darken(@purple, 10%);
+		border-radius: 100%;
+		transform: translateZ(0);
+	
+/*
+		.pops {
+			.pop {
+				position: absolute;
+				left: 50%;
+				top: 100%;
+				background-color: red;
+				transition: all @t ease-in;
+			}
+		}
+*/
+		.big-btn {
+			position: relative;
+			background: none;
+			color: @lightest;
+			font-size: 50px;
+			padding: 0;
+			border-radius: 100%;
+			margin: 0 0 @u*2 0;
+			outline: none;
+			box-shadow: 0 12px 0 darken(@green, 20%), 0 15px 20px rgba(0, 0, 0, .35);
+			transition: box-shadow .1s ease-in-out;
+			perspective: 400;
+			transform: rotateX(0) translateY(0);
+			transform-origin: center top 200px;
+			transform-style: preserve-3d;
+			user-select: none;
+			z-index: 3;
+			
+			img {
+				transform: rotate(45deg);
+			}
+			> * {
+				display: inline-block;
+				background-color: @green;
+				background-image: linear-gradient(fadeout(@lightest, 90%), fadeout(@darkest, 90%));
+				text-transform: uppercase;
+				text-shadow: 0 -1px 1px rgba(175, 49, 95, .7);
+				padding: 25px 50px 50px;
+				border-radius: 100%;
+				box-shadow: inset 0 -1px 1px rgba(255, 255, 255, .15);
+				transition: background-color .2s ease-in-out, transform .1s ease-in-out;
+			}
+			&:hover > * {
+			    background-color: lighten(@green, 5%);
+			    text-shadow: 0 -1px 1px rgba(175, 49, 95, .9), 0 0 5px rgba(255, 255, 255, .8);
+			}
+			&:active > * {
+			    transform: translate(0, 4px);
+			}
+			&:active,
+			&:focus {
+			    box-shadow: 0 12px 0 darken(@green, 20%), 0 12px 10px rgba(0, 0, 0, .32);
+			}
+		}
+		.share {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			padding: @u*2 10%;
+			z-index: 2;
+			
+			.counter {
+				font-family: Helvetica, Arial, sand-serif;
+				font-size: 36px;
+			}
+			h4 {
+				margin: 0;
+				font-size: 1.2em;
+			}
+			.twitter-share-button {
+				margin-top: @u;
+			}
+		}
+	}
+	&.popped {
+		.hole {
+			.big-btn {
+				transform: rotateX(-170deg) translate(-500px, -1000px);
+				transition: all @t*2 ease-in-out;
+			}
+		}
 	}
 }
 #footer {
