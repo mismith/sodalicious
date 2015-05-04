@@ -28,7 +28,7 @@ angular.module('sodalicious', ['firebaseHelper'])
 				});
 				
 				$timeout(function(){
-					$scope.poppedDone= true;
+					$scope.poppedDone = true;
 				}, 600);
 			});
 		};
@@ -39,6 +39,12 @@ angular.module('sodalicious', ['firebaseHelper'])
 			else if (count < 1000000000) return Math.floor(count / 100000) / 10 + 'M';
 			
 			return count;
+		};
+		
+		var info;
+		$scope.info = function(set){
+			if(set) info = (info == set ? null : set);
+			return info;
 		};
 	})
 	

@@ -35,8 +35,7 @@
 	<meta name="twitter:image:src" content="http://www.bringbacksodalicious.com/assets/img/og_image.jpg">
 	
 	<!-- styles -->
-	<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">-->
-	<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css">-->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Patrick+Hand" type="text/css">
 	<link rel="stylesheet" href="/assets/css/base.css" type="text/css">
 	
@@ -99,9 +98,18 @@
 					<div>people do too!</div>
 					
 					<br>
-					<img src="/assets/img/bottle.svg" height="16">&nbsp;
-					<img src="/assets/img/bottle.svg" height="16">&nbsp;
-					<img src="/assets/img/bottle.svg" height="16"><br>
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 33 100.6" enable-background="new 0 0 33 100.6" xml:space="preserve">
+						<path fill="red" d="M0,51.3l0.3,40.4c0,0-3.5,8.4,15,8.9c18.5,0.6,17.7-8.7,17.7-8.7	l-0.1-47.1c0,0-0.7-7.8-4.9-15.3s-5.6-16.3-5.6-16.3l-0.5-11c0,0-2.7-2.1-5.6-2.2s-5.5,1.8-5.5,1.8l-0.5,13c0,0-1.3,7.6-4.1,13.1S-0.1,37.5,0,51.3z"/>
+					</svg>&nbsp;
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 33 100.6" enable-background="new 0 0 33 100.6" xml:space="preserve">
+						<path fill="#55B747" d="M0,51.3l0.3,40.4c0,0-3.5,8.4,15,8.9c18.5,0.6,17.7-8.7,17.7-8.7	l-0.1-47.1c0,0-0.7-7.8-4.9-15.3s-5.6-16.3-5.6-16.3l-0.5-11c0,0-2.7-2.1-5.6-2.2s-5.5,1.8-5.5,1.8l-0.5,13c0,0-1.3,7.6-4.1,13.1S-0.1,37.5,0,51.3z"/>
+					</svg>&nbsp;
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 33 100.6" enable-background="new 0 0 33 100.6" xml:space="preserve">
+						<path fill="orange" d="M0,51.3l0.3,40.4c0,0-3.5,8.4,15,8.9c18.5,0.6,17.7-8.7,17.7-8.7	l-0.1-47.1c0,0-0.7-7.8-4.9-15.3s-5.6-16.3-5.6-16.3l-0.5-11c0,0-2.7-2.1-5.6-2.2s-5.5,1.8-5.5,1.8l-0.5,13c0,0-1.3,7.6-4.1,13.1S-0.1,37.5,0,51.3z"/>
+					</svg><br>
 					<br>
 					
 					<h4>Help us spread the word!</h4>
@@ -123,10 +131,21 @@
 			</figure>
 		</section>
 		
-		<footer id="footer">
-			<a href="#">What is this?</a>
-			&bull;
-			<a href="#">Who are we?</a>
+		<footer id="footer" class="grid-header grid-wrap">
+			<header>
+				<a ng-click="info('about')">What is this?</a>
+				&bull;
+				<a ng-click="info('contact')">Who are we?</a>
+			</header>
+			<div id="about" ng-show="info() == 'about'">
+				We don't know why, how, or exactly when these <a href="https://www.youtube.com/watch?v=XKOeWO7KRyA" target="_blank">poppin' 90's fruit snacks</a> left our grocery store shelves, but we really wish they hadn't. So, Betty Crocker/General Mills, what will it take to Bring Back Soda Licious??
+			</div>
+			<div id="contact" ng-show="info() == 'contact'">
+				"We" are a small group of Gen-Y friends from Calgary, AB, Canada who miss our favourite childhood treats.<br>
+				<br>
+				<i class="fa fa-twitter"></i> <a href="http://twitter.com/sodaliciousfan" target="_blank">sodaliciousfan</a><br>
+				<i class="fa fa-github"></i> <a href="http://github.com/mismith/sodalicious" target="_blank">mismith</a>
+			</div>
 		</footer>
 	</div>
 	
