@@ -9,13 +9,6 @@ angular.module('sodalicious', ['firebaseHelper'])
 	})
 		
 	.controller('AppCtrl', function($scope, $firebaseHelper, $timeout){
-/*
-		$scope.randp = function(min, max){
-			return Math.random() * max + min + '%';
-		};
-*/
-		
-		
 		var now = function(){ return new Date; };
 		var startTime = +now();
 		$scope.startTimer = function(){
@@ -46,5 +39,27 @@ angular.module('sodalicious', ['firebaseHelper'])
 			else if (count < 1000000000) return Math.floor(count / 100000) / 10 + 'M';
 			
 			return count;
+		};
+	})
+	
+	.directive('popper', function(){
+		return function($scope, $element, $attrs){
+			var rand = function(min, max){
+				return (Math.random() * (max - min)) + min;
+			};
+			var i = $scope.$eval($attrs.popper);
+			var popped = false;
+			$scope.$watch('popped', function(v){
+				if(v && ! popped){
+					var transform = 'scale3d(1, 1, 1) translate3d(' + rand(-1000, 1000) + 'px, -200px, 50px) rotateX(-220deg) rotate(' + rand(-540, 270) + 'deg)';
+					$element.css({
+						transitionDelay: i * 30 + 'ms',
+						webkitTransitionDelay: i * 30 + 'ms',
+						transform: transform,
+						webkitTransform: transform,
+						opacity: 0,
+					});
+				}
+			});
 		};
 	});

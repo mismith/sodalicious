@@ -25,6 +25,12 @@ body {
 .grid-slide {
 	min-height: 70vh;
 }
+.grid-section {
+	@media (max-width: @mobile) {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+}
 
 // sections
 #app {
@@ -43,21 +49,23 @@ body {
 	text-transform: uppercase;
 	
 	img {
-		width: 60%;
+		width: 80%;
+		margin: @u*2;
 	}
 	h1 {
-		font-size: 9em;
+		font-size: 100px;
 		margin: 0;
 	}
 	h2 {
-		font-size: 4em;
+		font-size: 40px;
 		margin: 0;
-		
-		strong {
-			display: block;
-			font-size: 2.25em;
-			line-height: .8;
-			font-weight: normal;
+	}
+	@media (max-width: @mobile) {
+		h1 {
+			font-size: 48px;
+		}
+		h2 {
+			font-size: 24px;
 		}
 	}
 }
@@ -72,19 +80,39 @@ body {
 		vertical-align: middle;
 		border: solid @u darken(@purple, 10%);
 		border-radius: 100%;
-		transform: translateZ(0);
+		user-select: none;
+		perspective: 1000px;
 	
-/*
 		.pops {
+			pointer-events: none;
+			
 			.pop {
 				position: absolute;
-				left: 50%;
-				top: 100%;
-				background-color: red;
-				transition: all @t ease-in;
+				bottom: 0;
+				left: 40%;
+				opacity: 1;
+				transform: scale3d(0, 0, 1) translate3d(0, 0, 0) rotateX(0) rotate(0);
+				transform-origin: center bottom 400px;
+				transition: all 900ms linear;
+				
+				svg {
+					width: 50px;
+					
+					path {
+						fill: @green;
+					}
+				}
+				&:nth-child(2n) svg path {
+					fill: saddlebrown;
+				}
+				&:nth-child(4n) svg path {
+					fill: red;
+				}
+				&:nth-child(3n) svg path {
+					fill: orange;
+				}
 			}
 		}
-*/
 		.big-btn {
 			position: relative;
 			background: none;
@@ -92,22 +120,23 @@ body {
 			font-size: 50px;
 			padding: 0;
 			border-radius: 100%;
-			margin: 0 0 @u*2 0;
+			margin: 0 0 12px 0;
 			outline: none;
 			box-shadow: 0 12px 0 darken(@green, 20%), 0 15px 20px rgba(0, 0, 0, .35);
 			transition: box-shadow .1s ease-in-out;
-			perspective: 200;
-			transform: rotateX(0) translateY(0);
-			transform-origin: center top 200px;
-			transform-style: preserve-3d;
-			user-select: none;
-			z-index: 3;
+			transform: rotateX(0) translateY(0) translateZ(0);
+			transform-origin: center top 50px;
+			z-index: 10;
+			
+			-webkit-tap-highlight-color: transparent;
 			
 			img {
 				transform: rotate(45deg);
 			}
 			> * {
 				display: inline-block;
+				width: 100%;
+				height: 100%;
 				min-width: 250px;
 				min-height: 250px;
 				background-color: @green;
@@ -124,7 +153,8 @@ body {
 			    text-shadow: 0 -1px 1px rgba(175, 49, 95, .9), 0 0 5px rgba(255, 255, 255, .8);
 			}
 			&:active > * {
-			    transform: translate(0, 4px);
+			   margin-top: @u/2;
+			   margin-bottom: -@u/2;
 			}
 			&:active,
 			&:focus {
@@ -138,6 +168,9 @@ body {
 			width: 100%;
 			height: 100%;
 			padding: @u*2 10%;
+			transform: translateZ(-0.000001);
+			transition: opacity 2s;
+			opacity: 0;
 			z-index: 2;
 			
 			.counter {
@@ -156,9 +189,12 @@ body {
 	&.popped {
 		.hole {
 			.big-btn {
-				transform: rotateX(-170deg) translate(-500px, -1000px);
-				transition: all @t*2 ease-in-out;
+				transform: rotateX(-170deg) translate(-300px, -1000px);
+				transition: all @t*3 ease-in-out 60ms;
 			}
+		}
+		.share {
+			opacity: 1;
 		}
 	}
 }
