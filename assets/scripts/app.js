@@ -51,18 +51,27 @@ angular.module('sodalicious', ['firebaseHelper'])
 	.directive('popper', function(){
 		return function($scope, $element, $attrs){
 			var rand = function(min, max){
-				return (Math.random() * (max - min)) + min;
-			};
-			var i = $scope.$eval($attrs.popper);
-			var popped = false;
+					return (Math.random() * (max - min)) + min;
+				},
+				i = $scope.$eval($attrs.popper),
+				popped = false;
+			
 			$scope.$watch('popped', function(v){
 				if(v && ! popped){
-					var transform = 'scale3d(1, 1, 1) translate3d(' + rand(-1000, 1000) + 'px, -200px, 50px) rotateX(-220deg) rotate(' + rand(-540, 270) + 'deg)';
+					var transform = 'scale3d(1, 1, 1) translate3d(' + rand(-1000, 1000) + 'px, -200px, 50px) rotateX(-220deg) rotate(' + rand(-540, 270) + 'deg)',
+						transitionDelay = i * 30 + 'ms';
+					
 					$element.css({
-						transitionDelay: i * 30 + 'ms',
-						webkitTransitionDelay: i * 30 + 'ms',
-						transform: transform,
+						webkitTransitionDelay: transitionDelay,
+						mozTransitionDelay: transitionDelay,
+						msTransitionDelay: transitionDelay,
+						oTransitionDelay: transitionDelay,
+						transitionDelay: transitionDelay,
 						webkitTransform: transform,
+						mozTransform: transform,
+						msTransform: transform,
+						oTransform: transform,
+						transform: transform,
 						opacity: 0,
 					});
 				}
